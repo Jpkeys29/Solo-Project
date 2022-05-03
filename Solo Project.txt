@@ -1,11 +1,11 @@
 [REQUIRED] Name: Jp Arango
 [REQUIRED] Project Title: Wealth
 [REQUIRED] Project Stack: Flask
-[REQUIRED] GitHub Repo Link: 
+[REQUIRED] GitHub Repo Link: https://github.com/Jpkeys29/Solo-Project/edit/main/Solo%20Project.txt
 
 [REQUIRED] Project Description: An application to buy stocks
 
-[REQUIRED] New Programming Concept(s) I'm Planning to Learn: Ajax,APIs, Many-to-many relationships
+[REQUIRED] New Programming Concept(s) I'm Planning to Learn: APIs
 
 [REQUIRED] Week 1 Features (to show at Review during Week 2): Back-end functionality
 - 
@@ -17,6 +17,7 @@
 [REQUIRED] Product Backlog (If I have more time after completing my MVP, I'll start to work on...)
 - 
 Determine gain/loss probability based on historical stock performance 
+Graphs
 
 
 

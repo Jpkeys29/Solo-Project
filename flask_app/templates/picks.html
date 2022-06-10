@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>picks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+    <div class="container">
+        <div class="p-3 mb-2 bg-dark text-white">
+    
+    <h2 class="text-center" style="padding-bottom: 30px;">Your Bag Alert {{user.first_name}}!</h2>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">Stock Name</th>
+                <th scope="col">Purchased on</th>
+                <th scope="col">Purchased Price(USD)</th>
+                <th scope="col">Number of Stocks Purchased</th>
+                <th scope="col">Total Purchase(USD)</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr class="table table-dark table-sm text-center" >
+                <td class="text-info" >{{one_pick.name}}</td>
+                <td class="text-light bg-dark">{{one_pick.created_at}}</td>
+                <td class="text-warning" style="width: 200px;">${{one_pick.price}}</td>
+                <td ">{{one_pick.quantity}}</td>
+                <td class="text-warning">${{one_pick.total}}</td>
+            </tr>    
+        </tbody>
+    </table>
+</body>
+<div style="margin: 30px 0px 20px 0px;">
+    <a href="/sell/{{one_pick.id}}" class="text-danger" style="margin-top: 50px;">Sell {{one_pick.name}}</a>    
+</div>
+<div>
+    <a href="/portfolio" style="margin-top:100px;">My Portfolio</a>
+</div>
+
+        </div>
+    </div>
+
+    <p style="font-size: 25px;">${{stock_info['price']}}</p>
+</html>

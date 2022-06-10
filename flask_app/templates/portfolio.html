@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Portfolio</title>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+    <div class="container">
+        <div class="p-3 mb-2 bg-dark text-white">
+            <div class="row">
+                <div class="col-12" style="align-items: center;">
+                    <h1 class="text-center">Welcome {{user.first_name}}!</h1>
+                </div>
+            </div>           
+            <div class="row" style="padding-bottom:10px;">
+                    <h2>My Portfolio</h2>
+            </div> 
+            <table >
+                <tbody>
+                    <tr>
+                        <div class="row">    
+                                {% for s in all_stocks %}
+                        <p style="margin: 10px 0px 15px 0px;">Stock: {{s.name}}
+                            <a href="/mypick/{{s.id}}" class="text-warning">Info</a>
+                        </p>
+                        {% endfor %}
+                        </div> 
+                    </tr>                   
+                </tbody> 
+                <p class=" rounded border border-primary text-center" style="padding: 10px;"> I want to purchase some stocks!</p>                
+            </table>
+        <form action="/purchase/gostock", method="post" >
+            <label for="stock" style="margin-top: 10px;">Stock Symbol:</label>
+            <input type="text" name="stock_symbol">   
+            <!-- <button type="submit">Go Stock</button>    -->
+            <button type="submit" class="btn btn-outline-danger">Go Stock</button>     
+        </form>
+    
+        {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                           
+                <strong>Flash AHHHHHHHHH!!!!</strong>
+                    {% for message in messages %}           
+                    <p>{{message}}</p>                   
+                    {% endfor %}
+                    {% endif %}
+                {% endwith %}
+        <div style="margin-top: 20px;">
+            <a href="/logout">Logout</a>
+        </div>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
+        </div>
+        </div>   
+    </div>    
+</body>
+
+</html>

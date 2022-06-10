@@ -119,7 +119,7 @@ class Stock:
 
         response = requests.request("GET", url, headers=headers, params=querystring)
 
-        data = response.json() #data is an object with all the dictionaries
+        data = response.json() # data is an object with all the dictionaries
         
         return {
             'name': request,

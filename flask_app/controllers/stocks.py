@@ -52,7 +52,7 @@ def purchase_stock():
 def show_pick(stock_id):
     one_pick = Stock.get_one({"id": stock_id})
     stock_info = Stock.api_call(one_pick.name)
-    return render_template('picks.html',stock_info = stock_info, one_pick = one_pick ,user = User.get_by_id({'id':session['user_id']}))
+    return render_template('picks.html',stock_info = stock_info one_pick = one_pick ,user = User.get_by_id({'id':session['user_id']}))
 
 # redirect to sell
 @app.route('/sell/<int:pick_id>')

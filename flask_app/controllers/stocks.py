@@ -1,7 +1,6 @@
-from crypt import methods
 import json
-from flask import render_template,redirect,request,flash,session
 from flask_app import app
+from flask import render_template,redirect,request,flash,session
 from flask_app.models.user import User
 from flask_app.models.stock import Stock
 import requests
@@ -20,6 +19,8 @@ def gostock():
     if 'user_id' not in session:
         return redirect ('/logout')
     stock_info = Stock.api_call(request.form['stock_symbol'])
+    session['price']= stock_info['price']
+    session['name'] = stock_info['name']
     return render_template('purchase.html', stock_info = stock_info)
     
 
@@ -33,13 +34,13 @@ def purchase_stock():
     # print((int(request.form['number_of_shares']*int(session["stock_diction"]['price']))))
     
     share_quantity= (int(request.form['number_of_shares']))
-    price = (int(session["stock_diction"]['price']))
-    
+    # price = (int(session["stock_diction"]['price']))
+    price = (int(session['price']))
 
     stock_diction = {
-        'name': session["stock_diction"]['name'],
-        'price': int(session["stock_diction"]['price']),
-        'user_id': session["stock_diction"]['user_id'],
+        'name': session['name'],
+        'price': int(session['price']),
+        'user_id':session['user_id'],
         'quantity':int(request.form['number_of_shares']),
         'total':int(share_quantity * price)
     }
@@ -52,7 +53,7 @@ def purchase_stock():
 def show_pick(stock_id):
     one_pick = Stock.get_one({"id": stock_id})
     stock_info = Stock.api_call(one_pick.name)
-    return render_template('picks.html',stock_info = stock_info one_pick = one_pick ,user = User.get_by_id({'id':session['user_id']}))
+    return render_template('picks.html',stock_info = stock_info, one_pick = one_pick ,user = User.get_by_id({'id':session['user_id']}))
 
 # redirect to sell
 @app.route('/sell/<int:pick_id>')

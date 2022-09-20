@@ -26,8 +26,11 @@ def create_user():
 
 @app.route('/login', methods=['POST'])
 def login():
+    #check if the user is in the db based on email in the form(making a call to our class method)
     user_from_db = user.User.get_by_email({'email': request.form['email']}) 
+    #if email is in the db check the password from the form to the password for that user in the db
     if user_from_db and bcrypt.check_password_hash(user_from_db.password,request.form['password']):
+    #if both the above statement are true I want to log them in( save their id in session)
         session['user_id'] = user_from_db.id 
         return redirect('/portfolio')
     else:

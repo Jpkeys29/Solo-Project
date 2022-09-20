@@ -1,8 +1,9 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash,session
+from flask_app import app
 from flask_app.models import user
 import requests
-from flask import session
+
 
 
 class Stock:
@@ -45,10 +46,10 @@ class Stock:
     @classmethod
     def get_all(cls):
         query = 'select * from stocks;'
-        results = connectToMySQL(cls.db_stock).query_db(cls)
-        all_stocks =[]
-        for row in results:
-            all_stocks.append(cls(row))
+        results = connectToMySQL(cls.db_stock).query_db(cls)  #results is a list of dictionaries
+        all_stocks =[]    
+        for row in results:  #row is a dictionary
+            all_stocks.append(cls(row))   #cls is the constructor of the class Stock
         return all_stocks
 
     #get all by trader
@@ -56,8 +57,7 @@ class Stock:
     def get_all_by_trader(cls,data):
         query = "select * from stocks JOIN users on user_id = users.id where users.id=%(id)s;"
         results = connectToMySQL(cls.db_stock).query_db(query,data)
-        all_stocks = []
-        
+        all_stocks = []       
         for s in results:
             this_stock = cls(s) #stock object
 
@@ -100,11 +100,6 @@ class Stock:
             'updated_at':results[0]['updated_at']
         }
         this_trader = user.User(user_data)#user object
-
-    # @classmethod
-    # def update(cls,data):
-    #     query = 'update stocks set quantity =%(quantity)s, total=%(total)s, where id=%(id)s;'
-    #     return connectToMySQL(cls.db_stock).query_db(query,data)
 
     @staticmethod
     def api_call(request):
